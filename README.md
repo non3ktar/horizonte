@@ -307,7 +307,7 @@ For setup details, see the [Configuration Guide](docs/configuration.md). For MCP
 
 ## Supported By
 
-Horizon is an open-source project maintained in spare time. If you'd like to support its ongoing development, feel free to [open an issue](https://github.com/Thysrael/Horizon/issues/new) or [email to me](mailto:thysrael@163.com).
+Horizon is an open-source project maintained in spare time. If you'd like to support the project or be listed here, feel free to [open an issue](https://github.com/Thysrael/Horizon/issues/new) or [email me](mailto:thysrael@163.com).
 
 | Supporter | Details |
 |-----------|---------|

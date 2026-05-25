@@ -167,7 +167,7 @@ flowchart LR
 
 ## 赞助
 
-Horizon 是一个业余时间维护的开源项目。如果你愿意支持它继续迭代，欢迎[创建一个 Issue](https://github.com/Thysrael/Horizon/issues/new) 或[发邮件](mailto:thysrael@163.com)联系我。
+Horizon 是一个业余时间维护的开源项目。如果你愿意支持这个项目，或希望出现在这里，欢迎[创建一个 Issue](https://github.com/Thysrael/Horizon/issues/new) 或[发邮件](mailto:thysrael@163.com)联系我。
 
 | 支持方 | 说明 |
 |--------|------|

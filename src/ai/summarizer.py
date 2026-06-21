@@ -57,6 +57,7 @@ LABELS = {
             "2. 添加更多多样化的信息源\n"
             "3. 检查 AI 模型是否正常工作\n"
         ),
+    },
     "pt_BR": {
         "header": "Horizon Diário",
         "source": "Fonte",

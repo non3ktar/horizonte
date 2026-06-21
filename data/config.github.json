@@ -33,8 +33,40 @@
           "enabled": true,
           "sort": "hot",
           "time_filter": "day",
-          "fetch_limit": 15,
+          "fetch_limit": 10,
           "min_score": 50
+        },
+        {
+          "subreddit": "androiddev",
+          "enabled": true,
+          "sort": "hot",
+          "time_filter": "day",
+          "fetch_limit": 10,
+          "min_score": 20
+        },
+        {
+          "subreddit": "Localfirst",
+          "enabled": true,
+          "sort": "hot",
+          "time_filter": "day",
+          "fetch_limit": 5,
+          "min_score": 5
+        },
+        {
+          "subreddit": "edtech",
+          "enabled": true,
+          "sort": "hot",
+          "time_filter": "day",
+          "fetch_limit": 5,
+          "min_score": 5
+        },
+        {
+          "subreddit": "opensource",
+          "enabled": true,
+          "sort": "hot",
+          "time_filter": "day",
+          "fetch_limit": 10,
+          "min_score": 20
         }
       ],
       "users": [],

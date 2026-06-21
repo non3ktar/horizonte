@@ -54,7 +54,7 @@ Consider:
 - Technical depth and novelty
 - Potential impact on the field
 - Quality of writing/presentation
-- Relevance to software engineering, AI/ML, and systems research
+- Relevance to AI, Educational Apps, EdTech, Vibe Coding, AI in Education, Open Source, Local-First/Offline-First architectures, and Android development.
 - Community discussion quality: insightful comments, diverse viewpoints, and debates increase value
 - Engagement signals: high upvotes/favorites with substantive discussion indicate community-validated importance
 """

@@ -5,7 +5,7 @@ date: 2026-06-21
 lang: pt_BR
 ---
 
-> Analisou 19 itens, mas nenhum atingiu o limite de importância.
+> Analisou 18 itens, mas nenhum atingiu o limite de importância.
 
 Nenhum destaque importante hoje. Isso pode indicar:
 - Um dia tranquilo nas suas fontes monitoradas

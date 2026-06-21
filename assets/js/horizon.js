@@ -41,7 +41,7 @@
     });
   }
 
-  /** Set up EN/中文 language toggle as a page-level control */
+  /** Set up EN/中文/PT-BR language toggle as a page-level control */
   function setupLanguageToggle() {
     // Create toggle buttons
     var toggle = document.createElement('div');
@@ -51,43 +51,55 @@
     btnEn.textContent = 'EN';
     btnEn.type = 'button';
 
+    var btnPt = document.createElement('button');
+    btnPt.textContent = 'PT-BR';
+    btnPt.type = 'button';
+
     var btnZh = document.createElement('button');
     btnZh.textContent = '中文';
     btnZh.type = 'button';
 
     toggle.appendChild(btnEn);
+    toggle.appendChild(btnPt);
     toggle.appendChild(btnZh);
 
     // Insert at top of body
     document.body.insertBefore(toggle, document.body.firstChild);
 
-    // Read saved preference, default to zh
+    // Read saved preference, default to pt_BR
     var saved = null;
     try { saved = localStorage.getItem('horizon-lang'); } catch (e) { /* noop */ }
-    var currentLang = saved === 'en' ? 'en' : 'zh';
+    var currentLang = saved || 'pt_BR';
 
     function updateButtons(lang) {
+      btnEn.classList.remove('active');
+      btnPt.classList.remove('active');
+      btnZh.classList.remove('active');
       if (lang === 'en') {
         btnEn.classList.add('active');
-        btnZh.classList.remove('active');
+      } else if (lang === 'pt_BR') {
+        btnPt.classList.add('active');
       } else {
         btnZh.classList.add('active');
-        btnEn.classList.remove('active');
       }
     }
 
     // Index page: toggle lang-section visibility
     var zhSection = document.getElementById('lang-zh');
+    var ptSection = document.getElementById('lang-pt_BR');
     var enSection = document.getElementById('lang-en');
 
     function showSection(lang) {
-      if (!zhSection || !enSection) return;
+      if (!zhSection || !enSection || !ptSection) return;
+      enSection.classList.add('hidden');
+      ptSection.classList.add('hidden');
+      zhSection.classList.add('hidden');
       if (lang === 'en') {
         enSection.classList.remove('hidden');
-        zhSection.classList.add('hidden');
+      } else if (lang === 'pt_BR') {
+        ptSection.classList.remove('hidden');
       } else {
         zhSection.classList.remove('hidden');
-        enSection.classList.add('hidden');
       }
     }
 
@@ -95,10 +107,13 @@
     function switchArticleLang(lang) {
       var path = window.location.pathname;
       var target = null;
-      if (lang === 'en' && /-zh(?:\.html)?$/.test(path.replace(/\/$/, ''))) {
-        target = path.replace(/-zh(\.html)?$/, '-en$1').replace(/-zh\/$/, '-en/');
-      } else if (lang === 'zh' && /-en(?:\.html)?$/.test(path.replace(/\/$/, ''))) {
-        target = path.replace(/-en(\.html)?$/, '-zh$1').replace(/-en\/$/, '-zh/');
+      var base = path.replace(/-(en|zh|pt_BR)(?:\.html)?$/, '').replace(/-(en|zh|pt_BR)\/$/, '');
+      if (/-en(?:\.html)?$|-en\/$/.test(path)) {
+        target = base + '-' + lang + (path.endsWith('.html') ? '.html' : '/');
+      } else if (/-zh(?:\.html)?$|-zh\/$/.test(path)) {
+        target = base + '-' + lang + (path.endsWith('.html') ? '.html' : '/');
+      } else if (/-pt_BR(?:\.html)?$|-pt_BR\/$/.test(path)) {
+        target = base + '-' + lang + (path.endsWith('.html') ? '.html' : '/');
       }
       if (target) window.location.href = target;
     }
@@ -107,7 +122,7 @@
       currentLang = lang;
       updateButtons(lang);
       try { localStorage.setItem('horizon-lang', lang); } catch (e) { /* noop */ }
-      if (zhSection && enSection) {
+      if (zhSection && enSection && ptSection) {
         showSection(lang);
       } else {
         switchArticleLang(lang);
@@ -115,11 +130,12 @@
     }
 
     btnEn.addEventListener('click', function () { setLang('en'); });
+    btnPt.addEventListener('click', function () { setLang('pt_BR'); });
     btnZh.addEventListener('click', function () { setLang('zh'); });
 
     // Initialize
     updateButtons(currentLang);
-    if (zhSection && enSection) {
+    if (zhSection && enSection && ptSection) {
       showSection(currentLang);
     }
   }

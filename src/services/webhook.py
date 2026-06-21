@@ -357,6 +357,18 @@ class WebhookNotifier:
                 "点击下方新闻面板即可在飞书内展开阅读全文。"
             )
 
+        if lang == "pt_BR":
+            if item_count == 0:
+                return (
+                    f"# Horizon Diário - {date}\n\n"
+                    f"> Analisou {all_items_count} itens, mas nenhum atingiu o limite de importância."
+                )
+            return (
+                f"# Horizon Diário - {date}\n\n"
+                f"> Selecionou {item_count} itens importantes de {all_items_count} itens coletados.\n\n"
+                "Expanda os painéis abaixo para ler o resumo completo no Feishu/Lark."
+            )
+
         if item_count == 0:
             return (
                 f"# Horizon Daily - {date}\n\n"
@@ -417,6 +429,7 @@ class WebhookNotifier:
                         "content": (
                             f"Horizon {date} 折叠日报"
                             if lang == "zh"
+                            else f"Horizon {date} Diário Colapsável" if lang == "pt_BR"
                             else f"Horizon {date} Collapsible Daily"
                         ),
                     },
@@ -467,6 +480,7 @@ class WebhookNotifier:
                     "message_title": (
                         f"Horizon {date} 折叠日报"
                         if lang == "zh"
+                        else f"Horizon {date} Diário Colapsável" if lang == "pt_BR"
                         else f"Horizon {date} Collapsible Daily"
                     ),
                     "message_kind": "collapsible",
@@ -500,6 +514,7 @@ class WebhookNotifier:
                 "message_title": (
                     f"Horizon {date} 总览"
                     if lang == "zh"
+                    else f"Horizon {date} Visão Geral" if lang == "pt_BR"
                     else f"Horizon {date} Overview"
                 ),
                 "message_kind": "overview",
@@ -536,7 +551,9 @@ class WebhookNotifier:
             {
                 **base_vars,
                 "message_title": (
-                    f"Horizon {date} 日报" if lang == "zh" else f"Horizon {date} Daily"
+                    f"Horizon {date} 日报" if lang == "zh" 
+                    else f"Horizon {date} Diário" if lang == "pt_BR" 
+                    else f"Horizon {date} Daily"
                 ),
                 "message_kind": "summary",
                 "summary": summary,

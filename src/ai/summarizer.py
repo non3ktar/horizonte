@@ -57,6 +57,25 @@ LABELS = {
             "2. 添加更多多样化的信息源\n"
             "3. 检查 AI 模型是否正常工作\n"
         ),
+    "pt_BR": {
+        "header": "Horizon Diário",
+        "source": "Fonte",
+        "background": "Contexto",
+        "discussion": "Discussão",
+        "references": "Referências",
+        "tags": "Tags",
+        "selected_items": "De {total} itens analisados, {selected} importantes foram selecionados.",
+        "empty_analyzed": "Analisou {total} itens, mas nenhum atingiu o limite de importância.",
+        "empty_body": (
+            "Nenhum destaque importante hoje. Isso pode indicar:\n"
+            "- Um dia tranquilo nas suas fontes monitoradas\n"
+            "- O limite de pontuação da IA (ai_score_threshold) está muito alto\n"
+            "- Suas fontes de informação precisam ser expandidas\n\n"
+            "Considere:\n"
+            "1. Reduzir o `ai_score_threshold` em config.json\n"
+            "2. Adicionar fontes de informação mais variadas\n"
+            "3. Verificar se o modelo de IA está funcionando corretamente\n"
+        ),
     },
 }
 
@@ -131,6 +150,12 @@ class DailySummarizer:
                 f"> 从 {total_fetched} 条内容中筛选出 {len(items)} 条重要资讯。\n\n"
                 "下面会按新闻逐条发送详情，你可以只看感兴趣的标题。\n\n"
             )
+        elif language == "pt_BR":
+            header = (
+                f"# {labels['header']} - {date}\n\n"
+                f"> Selecionou {len(items)} itens importantes de {total_fetched} itens coletados.\n\n"
+                "Os detalhes serão enviados item por item para que você possa ler apenas os tópicos que lhe interessam.\n\n"
+            )
         else:
             header = (
                 f"# {labels['header']} - {date}\n\n"
@@ -156,8 +181,12 @@ class DailySummarizer:
         total: int,
     ) -> str:
         """Generate one item message for multi-message webhook delivery."""
-        labels = LABELS.get(language, LABELS["en"])
-        prefix = f"第 {index}/{total} 条\n\n" if language == "zh" else f"Item {index}/{total}\n\n"
+        if language == "zh":
+            prefix = f"第 {index}/{total} 条\n\n"
+        elif language == "pt_BR":
+            prefix = f"Item {index}/{total}\n\n"
+        else:
+            prefix = f"Item {index}/{total}\n\n"
         return prefix + self._format_item(item, labels, language, index).rstrip("-\n ")
 
     def _format_item(self, item: ContentItem, labels: dict, language: str, index: int) -> str:
@@ -202,6 +231,10 @@ class DailySummarizer:
                     f"{item.published_at.month}月{item.published_at.day}日 "
                     f"{item.published_at:%H:%M}"
                 )
+            elif language == "pt_BR":
+                day = item.published_at.strftime("%d").lstrip("0")
+                month = item.published_at.strftime("%m")
+                source_parts.append(f"{day}/{month}, {item.published_at:%H:%M}")
             else:
                 day = item.published_at.strftime("%d").lstrip("0")
                 source_parts.append(item.published_at.strftime(f"%b {day}, %H:%M"))

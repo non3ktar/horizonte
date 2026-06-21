@@ -103,13 +103,13 @@ CONTENT_ENRICHMENT_SYSTEM = """You are a knowledgeable technical writer who help
 
 Given a high-scoring news item, its content, and web search results about the topic, your job is to produce a structured analysis.
 
-Provide EACH text field in BOTH English and Chinese. Use the following key naming convention:
-- title_en / title_zh
-- whats_new_en / whats_new_zh
-- why_it_matters_en / why_it_matters_zh
-- key_details_en / key_details_zh
-- background_en / background_zh
-- community_discussion_en / community_discussion_zh
+Provide EACH text field in English, Chinese, and Portuguese (pt-BR). Use the following key naming convention:
+- title_en / title_zh / title_pt_BR
+- whats_new_en / whats_new_zh / whats_new_pt_BR
+- why_it_matters_en / why_it_matters_zh / why_it_matters_pt_BR
+- key_details_en / key_details_zh / key_details_pt_BR
+- background_en / background_zh / background_pt_BR
+- community_discussion_en / community_discussion_zh / community_discussion_pt_BR
 
 Field definitions:
 0. **title** (one short phrase, ≤15 words): A clear, accurate headline for the news item.
@@ -127,6 +127,7 @@ Field definitions:
 **CRITICAL — Language rules (MUST follow):**
 - All *_en fields MUST be written in English.
 - All *_zh fields MUST be written in Simplified Chinese (简体中文). 绝对不能用英文写 _zh 字段的内容。Only keep technical abbreviations, acronyms, and widely-used proper nouns (e.g. "GPT-4", "CUDA", "Rust") in their original English form; everything else must be Chinese.
+- All *_pt_BR fields MUST be written in Brazilian Portuguese (Português do Brasil).
 
 Guidelines:
 - EVERY field (except community_discussion when no comments exist) must contain at least one complete sentence — no field may be empty or contain just a phrase
@@ -154,19 +155,25 @@ CONTENT_ENRICHMENT_USER = """Provide a structured bilingual analysis for the fol
 **Web Search Results (for grounding):**
 {web_context}
 
-Respond with valid JSON only. Each _en field must be in English; each _zh field MUST be in Simplified Chinese (中文). Every field MUST be at least one complete sentence (except community_discussion fields when no comments exist):
+Respond with valid JSON only. Each _en field must be in English; each _zh field MUST be in Simplified Chinese (中文); each _pt_BR field MUST be in Brazilian Portuguese. Every field MUST be at least one complete sentence (except community_discussion fields when no comments exist):
 {{
   "title_en": "<short headline in English, ≤15 words>",
   "title_zh": "<用中文写一个简短标题，不超过15个词>",
+  "title_pt_BR": "<manchete curta em Português, ≤15 palavras>",
   "whats_new_en": "<1-2 sentences in English>",
   "whats_new_zh": "<用中文写1-2句话>",
+  "whats_new_pt_BR": "<1-2 frases em Português>",
   "why_it_matters_en": "<1-2 sentences in English>",
   "why_it_matters_zh": "<用中文写1-2句话>",
+  "why_it_matters_pt_BR": "<1-2 frases em Português>",
   "key_details_en": "<1-2 sentences in English>",
   "key_details_zh": "<用中文写1-2句话>",
+  "key_details_pt_BR": "<1-2 frases em Português>",
   "background_en": "<2-4 sentences in English, or empty string>",
   "background_zh": "<用中文写2-4句话，或空字符串>",
+  "background_pt_BR": "<2-4 frases em Português, ou string vazia>",
   "community_discussion_en": "<1-3 sentences in English, or empty string>",
   "community_discussion_zh": "<用中文写1-3句话，或空字符串>",
+  "community_discussion_pt_BR": "<1-3 frases em Português, ou string vazia>",
   "sources": ["<url from search results>", "..."]
 }}"""

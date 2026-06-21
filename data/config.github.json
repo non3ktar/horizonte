@@ -19,10 +19,34 @@
     },
     "rss": [
       {
-        "name": "Simon Willison",
-        "url": "https://simonwillison.net/atom/everything/",
+        "name": "EdSurge (EdTech)",
+        "url": "https://www.edsurge.com/articles_rss",
         "enabled": true,
-        "category": "ai-tools"
+        "category": "edtech"
+      },
+      {
+        "name": "eSchool News",
+        "url": "https://www.eschoolnews.com/feed/",
+        "enabled": true,
+        "category": "edtech"
+      },
+      {
+        "name": "Free Tech 4 Teachers",
+        "url": "https://feeds.feedburner.com/freetech4teachers",
+        "enabled": true,
+        "category": "edtech"
+      },
+      {
+        "name": "The Edublogger",
+        "url": "https://www.theedublogger.com/feed/",
+        "enabled": true,
+        "category": "edtech"
+      },
+      {
+        "name": "Hack Education",
+        "url": "http://hackeducation.com/feed.xml",
+        "enabled": true,
+        "category": "edtech"
       }
     ],
     "reddit": {

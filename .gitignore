@@ -45,7 +45,7 @@ data/mcp.secrets.json
 data/mcp-secrets.json
 data/mcp-runs/
 
-docs/_posts/*.md
+# docs/_posts/*.md (removido para não bloquear deploy)
 
 # Logs
 logs/*.log
